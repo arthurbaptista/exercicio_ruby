@@ -1,0 +1,28 @@
+<h1>Busca de Cidades</h1>
+
+<%= form_with url: cities_path, method: :get, local: true do %>
+  <div>
+    <%= label_tag :state, "Estado" %>
+    <%= select_tag :state, options_from_collection_for_select(@states, "name", "name"), include_blank: true %>
+  </div>
+
+  <div>
+    <%= label_tag :name, "Parte do Nome da Cidade" %>
+    <%= text_field_tag :name %>
+  </div>
+
+  <div>
+    <%= submit_tag "Buscar" %>
+  </div>
+<% end %>
+
+<h2>Resultados:</h2>
+<% if @cities %>
+  <ul>
+    <% @cities.each do |city| %>
+      <li><%= city.name %> - <%= city.state.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Nenhuma cidade encontrada.</p>
+<% end %>
